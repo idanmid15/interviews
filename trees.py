@@ -24,6 +24,23 @@ def create_n_spaces(n):
 
 
 def pretty_print_tree(tree):
+    """
+    Given a tree node, this function prints the tree in a pretty manner.
+    For example:
+                        w
+                 /            \
+          a                         v
+        /    \                    /    \
+      b         c               o         u
+   /   \      /   \          /   \      /   \
+d       z   e       f     x       1   q       t
+  \          \     / \      \          \     / \
+    g         h   i   j       m         p   r   s
+   /                         /
+  k                         l
+
+    :param tree: the given tree to print out
+    """
     def calculate_element_location(tree_node, current_spaces, depth=0):
         def calculate_directional_element_location(root, last_index, direction_symbol):
             if root is not None:
