@@ -3,6 +3,7 @@ import string
 import random
 import time
 
+
 def generate_characters():
     """
     For any given input, renders random combinations of characters until the input is rendered,

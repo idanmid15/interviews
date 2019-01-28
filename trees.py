@@ -20,18 +20,18 @@ def num_tree_nodes(tree):
 
 
 def create_n_spaces(n):
-    return "".join([" " for i in range(n - 1)])
+    return "".join([" " for _ in range(n - 1)])
 
 
 def pretty_print_tree(tree):
     def calculate_element_location(tree_node, current_spaces, depth=0):
-        def calculate_directional_element_location(tree, last_index, direction_symbol):
-            if tree is not None:
-                next_index = in_order_tree.index(tree.value)
+        def calculate_directional_element_location(root, last_index, direction_symbol):
+            if root is not None:
+                next_index = in_order_tree.index(root.value)
                 if depth + 1 not in rows_to_elements:
                     rows_to_elements[depth + 1] = []
                 rows_to_elements[depth + 1] += [(direction_symbol, current_spaces + (next_index - last_index))]
-                calculate_element_location(tree, current_spaces + (next_index - last_index) * 2, depth + 2)
+                calculate_element_location(root, current_spaces + (next_index - last_index) * 2, depth + 2)
 
         if tree_node is not None:
             if depth not in rows_to_elements:
@@ -71,11 +71,11 @@ if __name__ == '__main__':
     f = TreeNode("f", i, j)
     c = TreeNode("c", e, f)
     tree_node1 = TreeNode("a", b, c)
-    l = TreeNode("l")
-    m = TreeNode("m", l)
-    n = TreeNode("n", right=m)
+    l1 = TreeNode("l")
+    m = TreeNode("m", l1)
+    x = TreeNode("x", right=m)
     z1 = TreeNode("1")
-    o = TreeNode("o", n, z1)
+    o = TreeNode("o", x, z1)
     p = TreeNode("p")
     q = TreeNode("q", right=p)
     r = TreeNode("r")
@@ -83,5 +83,5 @@ if __name__ == '__main__':
     t = TreeNode("t", r, s)
     u = TreeNode("u", q, t)
     tree_node2 = TreeNode("v", o, u)
-    tree_node = TreeNode("w", tree_node1, tree_node2)
-    pretty_print_tree(tree_node)
+    tree_node3 = TreeNode("w", tree_node1, tree_node2)
+    pretty_print_tree(tree_node3)

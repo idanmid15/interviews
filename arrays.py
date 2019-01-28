@@ -1,7 +1,7 @@
 
-def max_contiguous_subarray(array):
+def max_contiguous_sub_array(array):
     """
-    Given a binary array, find the maximum length of a contiguous subarray with equal number of 0 and 1
+    Given a binary array, find the maximum length of a contiguous sub array with equal number of 0 and 1
 
     *******
     [], [0], [1] = 0
@@ -79,12 +79,13 @@ def reverse_str(begin, end, words):
 
 
 if __name__ == '__main__':
-    print(max_contiguous_subarray([]))
-    print(max_contiguous_subarray([1]))
-    print(max_contiguous_subarray([0]))
-    print(max_contiguous_subarray([0, 1, 0]))
-    print(max_contiguous_subarray([0, 0, 0, 1, 1, 0]))
-    print(max_contiguous_subarray([0, 1, 1, 0, 0, 1, 1, 0, 0]))
-    print(max_contiguous_subarray([0, 0, 0, 0, 0, 0, 1, 1, 1, 1]))
-    print(max_contiguous_subarray([1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1]))
-    print(switch_first_and_last_words(['p','e','r','f','e','c','t',' ', 'm','a','k','e','s',' ', 'p','r','a','c','t','i','c', 'e']))
+    print(max_contiguous_sub_array([]))
+    print(max_contiguous_sub_array([1]))
+    print(max_contiguous_sub_array([0]))
+    print(max_contiguous_sub_array([0, 1, 0]))
+    print(max_contiguous_sub_array([0, 0, 0, 1, 1, 0]))
+    print(max_contiguous_sub_array([0, 1, 1, 0, 0, 1, 1, 0, 0]))
+    print(max_contiguous_sub_array([0, 0, 0, 0, 0, 0, 1, 1, 1, 1]))
+    print(max_contiguous_sub_array([1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1]))
+    print(switch_first_and_last_words(['p', 'e', 'r', 'f', 'e', 'c', 't', ' ', 'm', 'a', 'k', 'e', 's', ' ', 'p', 'r',
+                                       'a', 'c', 't', 'i', 'c', 'e']))
