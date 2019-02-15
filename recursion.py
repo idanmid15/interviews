@@ -1,5 +1,8 @@
 
-def num_ways(num_stairs, allowed_steps):
+from datetime import datetime
+
+
+def num_ways(num_stairs, allowed_steps, visited_steps):
     """
     Ways to climb N stairs
 
@@ -22,11 +25,16 @@ def num_ways(num_stairs, allowed_steps):
         return 0
     if num_stairs == 0:
         return 1
+    if num_stairs in visited_steps:
+        return visited_steps[num_stairs]
     accumulated_ways = 0
     for allowed_step in allowed_steps:
-        accumulated_ways += num_ways(num_stairs - allowed_step, allowed_steps)
+        accumulated_ways += num_ways(num_stairs - allowed_step, allowed_steps, visited_steps)
+    visited_steps[num_stairs] = accumulated_ways
     return accumulated_ways
 
 
 if __name__ == '__main__':
-    print(num_ways(10, {1, 2, 3, 4}))
+    start = datetime.now()
+    print(num_ways(997, {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21}, {}))
+    print(datetime.now() - start)
