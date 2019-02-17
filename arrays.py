@@ -78,6 +78,19 @@ def reverse_str(begin, end, words):
     return words
 
 
+def add_up_to_k(arr1, arr2, k):
+    """
+    Given a list of numbers and a number k, return whether any two numbers from the list add up to k.
+
+    For example, given [10, 15, 3, 7] and k of 17, return true since 10 + 7 is 17.
+    """
+    k_complements = [k - i for i in arr1]
+    for i in arr2:
+        if i in k_complements:
+            return True
+    return False
+
+
 if __name__ == '__main__':
     print(max_contiguous_sub_array([]))
     print(max_contiguous_sub_array([1]))
@@ -89,3 +102,7 @@ if __name__ == '__main__':
     print(max_contiguous_sub_array([1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1]))
     print(switch_first_and_last_words(['p', 'e', 'r', 'f', 'e', 'c', 't', ' ', 'm', 'a', 'k', 'e', 's', ' ', 'p', 'r',
                                        'a', 'c', 't', 'i', 'c', 'e']))
+    print(add_up_to_k([1, 2, 3], [4, 5, 6], 9))  # True
+    print(add_up_to_k([1, 2, 3], [4, 5, 6], 10))  # False
+    print(add_up_to_k([], [4, 5, 6], 10))  # False
+    print(add_up_to_k([-1], [4, 5, 6], 4))  # True
