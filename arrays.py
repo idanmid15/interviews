@@ -91,6 +91,32 @@ def add_up_to_k(arr1, arr2, k):
     return False
 
 
+def product_except_i(arr):
+    """
+    Given an array of integers, return a new array such that each element at index i of the new array is the product of all
+     the numbers in the original array except the one at i.
+
+    For example, if our input was [1, 2, 3, 4, 5], the expected output would be [120, 60, 40, 30, 24]. If our input was
+     [3, 2, 1], the expected output would be [2, 3, 6].
+
+    Follow-up: what if you can't use division?
+    """
+    product_arr = [1]
+
+    # Multiply and carry the sum along to the right
+    for idx, _ in enumerate(arr):
+        if idx > 0:
+            product_arr += [product_arr[idx - 1] * arr[idx - 1]]
+
+    right_accum = 1
+
+    # Multiply and carry the sum from the right to left in addition to the left to the right sum already calculated
+    for idx, _ in enumerate(arr):
+        if idx > 0:
+            right_accum *= arr[len(product_arr) - idx]
+            product_arr[len(product_arr) - 1 - idx] *= right_accum
+    return product_arr
+
 if __name__ == '__main__':
     print(max_contiguous_sub_array([]))
     print(max_contiguous_sub_array([1]))
@@ -106,3 +132,4 @@ if __name__ == '__main__':
     print(add_up_to_k([1, 2, 3], [4, 5, 6], 10))  # False
     print(add_up_to_k([], [4, 5, 6], 10))  # False
     print(add_up_to_k([-1], [4, 5, 6], 4))  # True
+    print(product_except_i([1, 2, 3]))
