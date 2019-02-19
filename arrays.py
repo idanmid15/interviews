@@ -117,6 +117,7 @@ def product_except_i(arr):
             product_arr[len(product_arr) - 1 - idx] *= right_accum
     return product_arr
 
+
 if __name__ == '__main__':
     print(max_contiguous_sub_array([]))
     print(max_contiguous_sub_array([1]))

@@ -6,6 +6,9 @@ class TreeNode:
         self.left = left
         self.right = right
 
+    def __str__(self):
+        return "TreeNode({}, {}, {})".format(str(self.value), self.left, self.right)
+
 
 def in_order_str(tree):
     if tree is None:
@@ -75,6 +78,35 @@ d       z   e       f     x       1   q       t
         print(row)
 
 
+def serialize_tree(tree):
+    """
+    Given a tree's root, serializes it into a string.
+    For example:
+    tree = TreeNode("a", TreeNode("b", TreeNode("c")), TreeNode("d"))
+    serialize_tree(tree) ====>>> abc***d**  (using pre-order traversal)
+    """
+    if tree is None:
+        return "*"
+    return str(tree.value) + serialize_tree(tree.left) + serialize_tree(tree.right)
+
+
+def deserialize_tree(tree_str):
+    """
+    Given a string, turns the string into a TreeNode
+    For example:
+    tree_str = abc***d**
+    deserialize_tree(tree_str) ====>>> TreeNode("a", TreeNode("b", TreeNode("c")), TreeNode("d"))
+    """
+
+    def inner_helper(idx_dict):
+        idx_dict["idx"] += 1
+        str_idx = idx_dict["idx"]
+        if str_idx == len(tree_str) or tree_str[str_idx] == "*":
+            return None
+        return TreeNode(tree_str[str_idx], inner_helper(idx_dict), inner_helper(idx_dict))
+    return inner_helper({"idx": -1})
+
+
 if __name__ == '__main__':
     k = TreeNode("k")
     g = TreeNode("g", k)
@@ -102,3 +134,4 @@ if __name__ == '__main__':
     tree_node2 = TreeNode("v", o, u)
     tree_node3 = TreeNode("w", tree_node1, tree_node2)
     pretty_print_tree(tree_node3)
+    print(deserialize_tree(serialize_tree(TreeNode("a", TreeNode("b", TreeNode("c")), TreeNode("d")))))
