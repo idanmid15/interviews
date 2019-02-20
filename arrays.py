@@ -118,6 +118,48 @@ def product_except_i(arr):
     return product_arr
 
 
+def missing_positive_integer(arr):
+    """
+    Given an array of integers, find the first missing positive integer in linear time and constant space.
+    In other words, find the lowest positive integer that does not exist in the array.
+    The array can contain duplicates and negative numbers as well.
+
+    For example, the input [3, 4, -1, 1] should give 2. The input [1, 2, 0] should give 3.
+
+    You can modify the input array in-place.
+    """
+    max1 = max(arr)
+    right_idx = len(arr) - 1
+    left_idx = 0
+
+    #  Move positives to the right of array
+    while left_idx < right_idx:
+        while arr[left_idx] < 0 and left_idx < len(arr):
+            left_idx += 1
+        while arr[right_idx] > 0 and right_idx > 0:
+            right_idx -= 1
+        if left_idx < right_idx:
+            arr[left_idx], arr[right_idx] = arr[right_idx], arr[left_idx]
+
+    #  Take current list values which are positive and turn the cells who's location corresponds to the value and turn
+    #  them negative
+    for i in range(len(arr)):
+        if len(arr) > arr[i] > -1:
+            tmp = arr[i]
+            while arr[tmp] > -1:
+                if arr[tmp] < len(arr):
+                    tmp1 = arr[tmp]
+                    arr[tmp] = -1
+                    tmp = tmp1
+                arr[tmp] = -1
+
+    #  Find first non negative occurrence
+    for idx, val in enumerate(arr):
+        if val > 0 and idx > 0:
+            return idx
+    return max1 + 1
+
+
 if __name__ == '__main__':
     print(max_contiguous_sub_array([]))
     print(max_contiguous_sub_array([1]))
@@ -134,3 +176,8 @@ if __name__ == '__main__':
     print(add_up_to_k([], [4, 5, 6], 10))  # False
     print(add_up_to_k([-1], [4, 5, 6], 4))  # True
     print(product_except_i([1, 2, 3]))
+    print(missing_positive_integer([1, -3, 0, -1, 2, 1, 5, 4]))  # 3
+    print(missing_positive_integer([3, 4, -1, 1]))  # 2
+    print(missing_positive_integer([1, 2, 0]))  # 3
+    print(missing_positive_integer([5, 7, 6]))  # 1
+    print(missing_positive_integer([5, 7, 6, 3, 2, 1]))  # 4
