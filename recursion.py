@@ -34,7 +34,33 @@ def num_ways(num_stairs, allowed_steps, visited_steps):
     return accumulated_ways
 
 
+def cons(a, b):
+    def pair(f):
+        return f(a, b)
+    return pair
+
+
+def car(pair):
+    """
+    cons(a, b) constructs a pair, and car(pair) and cdr(pair) returns the first and last element of that pair.
+    For example, car(cons(3, 4)) returns 3, and cdr(cons(3, 4)) returns 4.
+    """
+    def get_first(a, _):
+        return a
+    return pair(get_first)
+
+
+def cdr(pair):
+    def get_last(_, b):
+        return b
+    return pair(get_last)
+
+
 if __name__ == '__main__':
     start = datetime.now()
     print(num_ways(997, {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21}, {}))
     print(datetime.now() - start)
+    print(car(cons(3, 4)))  # 3
+    print(cdr(cons(3, 4)))  # 4
+    print(cdr(cdr(cons(3, cons(4, 5)))))  # 5
+    print(car(cdr(cons(3, cons(4, 5)))))  # 4
