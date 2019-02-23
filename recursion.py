@@ -56,6 +56,20 @@ def cdr(pair):
     return pair(get_last)
 
 
+def amount_decoded_messages(message):
+    """
+    Given the mapping a = 1, b = 2, ... z = 26, and an encoded message, count the number of ways it can be decoded.
+    For example, the message '111' would give 3, since it could be decoded as 'aaa', 'ka', and 'ak'.
+    You can assume that the messages are decodable. For example, '001' is not allowed.
+    This is the naive solution, memoization can be used here
+    """
+    if message == '' or len(message) == 1:
+        return 1
+    if 26 >= int(message[0:2]) >= 10:
+        return amount_decoded_messages(message[2:]) + amount_decoded_messages(message[1:])
+    return amount_decoded_messages(message[1:])
+
+
 if __name__ == '__main__':
     start = datetime.now()
     print(num_ways(997, {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21}, {}))
@@ -64,3 +78,4 @@ if __name__ == '__main__':
     print(cdr(cons(3, 4)))  # 4
     print(cdr(cdr(cons(3, cons(4, 5)))))  # 5
     print(car(cdr(cons(3, cons(4, 5)))))  # 4
+    print(amount_decoded_messages('111'))  # 3
