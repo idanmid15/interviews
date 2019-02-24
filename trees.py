@@ -107,6 +107,49 @@ def deserialize_tree(tree_str):
     return inner_helper({"idx": -1})
 
 
+def num_unival_trees(root):
+    """
+    A unival tree (which stands for "universal value") is a tree where all nodes under it have the same value.
+    Given the root to a binary tree, count the number of unival subtrees.
+    For example, the following tree has 5 unival subtrees:
+
+       0
+      / \
+     1   0
+        / \
+       1   0
+      / \
+     1   1
+    """
+    def unival_helper(tree_node):
+        """
+        returns the number of unival trees and the value of the nodes. If -1 is the value, not all nodes are equal.
+        """
+        if tree_node.left is None and tree_node.right is None:
+            return 1, tree_node.value
+        if tree_node.left is None:
+            right_tree = unival_helper(tree_node.right)
+            if right_tree[1] == tree_node.value:
+                return right_tree[0] + 1, right_tree[1]
+            else:
+                return right_tree[0], -1
+        if tree_node.right is None:
+            left_tree = unival_helper(tree_node.left)
+            if left_tree[1] == tree_node.value:
+                return left_tree[0] + 1
+            else:
+                return left_tree[0], -1
+        left_tree = unival_helper(tree_node.left)
+        right_tree = unival_helper(tree_node.right)
+        if right_tree[1] == tree_node.value and right_tree[1] == left_tree[1]:
+            return left_tree[0] + right_tree[0] + 1, tree_node.value
+        else:
+            return left_tree[0] + right_tree[0], -1
+    if root is None:
+        return 0
+    return unival_helper(root)[0]
+
+
 if __name__ == '__main__':
     k = TreeNode("k")
     g = TreeNode("g", k)
@@ -135,3 +178,5 @@ if __name__ == '__main__':
     tree_node3 = TreeNode("w", tree_node1, tree_node2)
     pretty_print_tree(tree_node3)
     print(deserialize_tree(serialize_tree(TreeNode("a", TreeNode("b", TreeNode("c")), TreeNode("d")))))
+    print(num_unival_trees(TreeNode("0", TreeNode("1"), TreeNode("0", TreeNode("1", TreeNode("1"), TreeNode("1")),
+                                                                 TreeNode("0")))))  # 5
